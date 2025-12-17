@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ankush | Qualifications</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: linear-gradient(120deg, #0077cc, #00b894);
+            color: #333;
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin: 0 1rem;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+        }
+
+        nav ul li a:hover,
+        nav ul li a.active {
+            background: #00b894;
+            color: #fff;
+        }
+
+        main {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            color: #0077cc;
+            text-decoration: underline;
+            text-align: left;
+        }
+
+        .list-container {
+            margin-top: 2rem;
+        }
+
+        .item {
+            background: #f8f8f8;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .item span {
+            flex: 1;
+        }
+
+        .item button {
+            margin-left: 0.5rem;
+            padding: 0.3rem 0.8rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .edit-btn {
+            background: #0077cc;
+            color: white;
+        }
+
+        .delete-btn {
+            background: #d63031;
+            color: white;
+        }
+
+        form {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        form input {
+            flex: 1;
+            padding: 0.8rem;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        form button {
+            padding: 0.8rem 1.2rem;
+            background: #00b894;
+            border: none;
+            border-radius: 6px;
+            color: white;
+            cursor: pointer;
+        }
+
+        @media (max-width: 600px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul li {
+                width: 100%;
+            }
+
+            nav ul li a {
+                width: 100%;
+                font-size: 1rem;
+            }
+
+            main {
+                padding: 1rem;
+                margin: 1rem;
+            }
+
+            .item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .item button {
+                margin-top: 0.5rem;
+            }
+
+            form {
+                flex-direction: column;
+            }
+
+            form input,
+            form button {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 400px) {
+            nav ul li a {
+                font-size: 0.9rem;
+                padding: 0.3rem 0.6rem;
+            }
+
+            h2 {
+                font-size: 1.2rem;
+            }
+
+            main {
+                padding: 0.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="skills.html">Skills</a></li>
+                <li><a href="qualifications.html" class="active">Qualifications</a></li>
+                <li><a href="work.html">Work</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Qualifications</h2>
+        <div class="list-container" id="qualifications-list">
+            <div class="item"><span>Class 10 - CPS School</span>
+                <button class="edit-btn" onclick="editItem(this,'qualifications')">Edit</button>
+                <button class="delete-btn" onclick="deleteItem(this,'qualifications')">Delete</button>
+            </div>
+            <div class="item"><span>Class 12 - HVM School</span>
+                <button class="edit-btn" onclick="editItem(this,'qualifications')">Edit</button>
+                <button class="delete-btn" onclick="deleteItem(this,'qualifications')">Delete</button>
+            </div>
+            <div class="item"><span>B.Tech in Computer Science - NIT DURGAPUR</span>
+                <button class="edit-btn" onclick="editItem(this,'qualifications')">Edit</button>
+                <button class="delete-btn" onclick="deleteItem(this,'qualifications')">Delete</button>
+            </div>
+        </div>
+        <div>
+            <form id="add-qualification-form">
+                <button type="submit">Add Qualification</button>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        let qualifications = [
+            { degree: "Class 10", institution: "CPS School", year: "2021" },
+            { degree: "Class 12", institution: "HVM School", year: "2023" },
+            { degree: "B.Tech in Computer Science", institution: "NIT DURGAPUR", year: "2028" },
+        ];
+
+        function renderQualifications() {
+            const container = document.getElementById("qualifications-list");
+            container.innerHTML = "";
+            qualifications.forEach((q, index) => {
+                let div = document.createElement("div");
+                div.className = "card";
+                div.innerHTML = `
+                    <h3>${q.degree}</h3>
+                    <p>${q.institution} (${q.year})</p>
+                    <button class="btn edit-btn" onclick="editQualification(${index})">✏️ Edit</button>
+                    <button class="btn delete-btn" onclick="deleteQualification(${index})">🗑️ Delete</button>`;
+                container.appendChild(div);
+            });
+        }
+        document.getElementById("add-qualification-form").addEventListener("submit", function (e) {
+            e.preventDefault();
+            addQualification();
+        });
+
+        function addQualification() {
+            let degree = prompt("Enter degree:");
+            let institution = prompt("Enter institution:");
+            let year = prompt("Enter year:");
+            if (degree && institution && year) {
+                qualifications.push({ degree, institution, year });
+                renderQualifications();
+            }
+        }
+
+        function editQualification(index) {
+            let degree = prompt("Edit degree:", qualifications[index].degree);
+            let institution = prompt("Edit institution:", qualifications[index].institution);
+            let year = prompt("Edit year:", qualifications[index].year);
+            if (degree && institution && year) {
+                qualifications[index] = { degree, institution, year };
+                renderQualifications();
+            }
+        }
+
+        function deleteQualification(index) {
+            qualifications.splice(index, 1);
+            renderQualifications();
+        }
+
+        document.addEventListener("DOMContentLoaded", renderQualifications);
+    </script>
+</body>
+
+</html>
